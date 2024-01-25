@@ -10,6 +10,38 @@
     <nav class="navbar bg-success bg-gradient">
         <div class="container-fluid">
           <a class="navbar-brand h1" href="#">UMarks</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            {% if request.user.is_authenticated %}
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a href="{% url 'dashboard' %}" class="nav-link {% if section == 'dashboard' %}active{% endif %}">
+                      My dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link {% if section == 'dashboard' %}active{% endif %}">
+                      Images
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link {% if section == 'dashboard' %}active{% endif %}">
+                      People
+                    </a>
+                </li>
+            </ul>
+            {% endif %}
+            <span class="navbar-text ms-stop">
+              {% if request.user.is_authenticated %}
+                Hello {{ request.user.first_name|default:"request.user.username" }},
+                <a href="{% url 'logout' %}">Log Out</a>
+              {% else %}
+                <a href="{% url 'login' %}">Log In</a>
+              {% endif %}
+            </span>
+          </div> 
         </div>
       </nav>
     <div id="content">
